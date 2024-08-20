@@ -1,0 +1,10 @@
+:root {
+  --primary-bg-color: #fff;
+  --primary-color1: #364555;
+  --primary-font-color: rgba(255, 255, 255, 1);
+  --header-height: 56px;
+
+  .dark {
+    --primary-font-color: black;
+  }
+}
