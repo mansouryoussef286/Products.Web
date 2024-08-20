@@ -1,0 +1,13 @@
+<div class="card">
+  <img class="card-img-top" [src]="Product.thumbnail" alt="Card image cap" />
+  <div class="card-body">
+    <h5 class="card-title">{{Product.title}}</h5>
+    <p class="card-text">{{Product.description}}</p>
+    <div class="rating">
+      <span class="rate" *ngIf="Product.rating">{{Product.rating}} / 5 </span>
+      <span class="rate" *ngIf="!Product.rating">N/A </span>
+    </div>
+    <div class="price">{{Product.price | currency}}</div>
+    <!-- <a href="#" class="btn btn-primary" [routerLink]="['/',RoutePaths.Course, Course.Id.toString()]">Go somewhere</a> -->
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="list"></div>
+
+<div class="page-inner">
+  <h1>Explore Our Courses</h1>
+  <div class="page-section">
+    <div class="page-section" *ngIf="!IsLoaded">
+      <app-loader></app-loader>
+    </div>
+    <div class="page-container courses" *ngIf="IsLoaded">
+      <ng-container *ngFor="let product of Products">
+        <app-product-card [Product]="product"></app-product-card>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<!-- <input type="text" class="form-control" id="x" name="x" [(ngModel)]="Filter.SearchInput" #x="ngModel" required /> -->
