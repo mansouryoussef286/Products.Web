@@ -10,7 +10,7 @@ export const InnerContainerRoutes: Routes = [
       {
         path: 'products',
         loadComponent: () =>
-          import('@App/Features/CoursesList/ProductsList').then(
+          import('@App/Features/ProductList/ProductsList').then(
             (c) => c.ProductsListComponent
           ),
       },
