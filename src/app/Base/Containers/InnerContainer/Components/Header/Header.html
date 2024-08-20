@@ -1,0 +1,50 @@
+<nav class="navbar">
+  <div class="left">
+    <a class="" [routerLink]="['home']" class="logo">
+      <img src="/assets/Images/logo.png" alt="logo-img" class="logo-img" />
+      ClickTik
+    </a>
+    <a class="nav-link" [routerLink]="['home']" routerLinkActive="active">
+      home
+    </a>
+  </div>
+
+  <div>
+    <a
+      class="nav-link"
+      *ngIf="!AuthService.IsAuthenticated"
+      [routerLink]="[RoutePaths.Login]"
+      routerLinkActive="active"
+    >
+      login
+    </a>
+
+    <input
+      type="text"
+      placeholder="search"
+      *ngIf="AuthService.IsAuthenticated"
+    />
+    <a
+      class="nav-link"
+      *ngIf="AuthService.IsAuthenticated"
+      routerLinkActive="active"
+    >
+      account
+    </a>
+    <a
+      class="nav-link"
+      *ngIf="AuthService.IsAuthenticated"
+      routerLinkActive="active"
+      (click)="signOut()"
+    >
+      signout
+    </a>
+    <a
+      class="nav-link"
+      *ngIf="AuthService.IsAuthenticated"
+      routerLinkActive="active"
+    >
+      cart
+    </a>
+  </div>
+</nav>
