@@ -24,7 +24,12 @@
     </a>
 
     <div class="search" *ngIf="AuthService.IsAuthenticated">
-      <input type="text" placeholder="search" />
+      <input
+        type="text"
+        placeholder="search"
+        [(ngModel)]="SearchInput"
+        (input)="onSearch()"
+      />
       <i class="fa fa-search"></i>
     </div>
 

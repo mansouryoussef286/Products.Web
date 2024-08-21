@@ -17,6 +17,7 @@ import {
   GridOptionsModel,
   SortOrderEnum,
 } from '@App/Common/Widgets/PaginationServer/GridOptionsModel';
+import { ProductsService } from '@App/Common/Services/products.service';
 
 @Component({
   standalone: true,
@@ -28,11 +29,6 @@ import {
     RouterModule,
     ProductCardComponent,
     LoaderComponent,
-    // RepeaterServer,
-    // SortField,
-    // Pagination,
-    // PageSizeOption,
-    // PagingLabel,
     RepeaterServerModule,
   ],
 })
@@ -47,10 +43,17 @@ export class ProductsListComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private HttpService: HttpService,
-    private StorageService: StorageService
+    private StorageService: StorageService,
+    private ProductsService: ProductsService
   ) {}
 
   ngOnInit() {
+    this.ProductsService.ProductsResponse$.subscribe(
+      (productsResponse: ProductModels.ApiResponse) => {
+        this.Products = productsResponse.products;
+        this.GridOptions.Count = productsResponse.total;
+      }
+    );
     this.Data.GetProducts();
     this.Data.GetCategories();
   }
@@ -64,7 +67,6 @@ export class ProductsListComponent implements OnInit {
           this.IsProductsLoaded = true;
           this.Products = data.products;
           this.GridOptions.Count = data.total;
-          console.log(this.GridOptions);
         }
       );
     },
@@ -88,8 +90,6 @@ export class ProductsListComponent implements OnInit {
         }&`;
       if (this.GridOptions.SortField)
         queryParam += `sortBy=${this.GridOptions.SortField}&order=${this.GridOptions.SortOrder}`;
-
-      console.log(queryParam);
 
       this.Data.GetProducts(queryParam);
     },

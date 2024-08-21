@@ -19,9 +19,11 @@
         </ng-container>
       </div>
       <div class="main">
+        <div *ngIf="Products && Products.length== 0">No Products Found</div>
         <pagination-server
           [GridOptions]="GridOptions"
           (GridOptionsChange)="Data.OnPaginationChange()"
+          *ngIf="Products && Products.length> 0"
         >
           <div class="paging">
             <div>

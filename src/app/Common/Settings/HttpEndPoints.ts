@@ -8,5 +8,6 @@ export class HttpEndPoints {
     GetOne: 'products/{id}',
     GetAll: 'products',
     Categories: 'products/categories',
+    Search: 'products/search?q={query}',
   };
 }
