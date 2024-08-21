@@ -1,4 +1,22 @@
 footer {
   display: flex;
   justify-content: space-between;
+  background-color: var(--footer-color);
+  padding: 50px;
+  color: white;
+  .main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      margin-inline-end: 10px;
+      border-radius: 8px;
+    }
+  }
+  .copyright {
+    color: var(--secondary-font-color);
+  }
 }

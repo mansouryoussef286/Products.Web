@@ -1,10 +1,14 @@
 :root {
-  --primary-bg-color: #fff;
-  --primary-color1: #364555;
-  --primary-font-color: rgba(255, 255, 255, 1);
-  --header-height: 56px;
+  --header-height: 80px;
 
+  --primary-bg-color: #fff;
+  --primary-color1: #41cccc;
+  --yellow: #f4b000;
+  --border-color: #344054;
+  --primary-font-color: #344054;
+  --secondary-font-color: #98a2b3;
+  --footer-color: #1d2939;
   .dark {
-    --primary-font-color: black;
+    --primary-font-color: white;
   }
 }

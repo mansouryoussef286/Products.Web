@@ -14,12 +14,18 @@ import { ProductModels } from '@App/Common/Models/Product.Models';
 })
 export class ProductCardComponent implements OnInit {
   @Input('Product') Product!: ProductModels.Product;
-
+  RoundedPrice!: string;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private HttpService: HttpService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    let num = (
+      (this.Product.price * (100 - this.Product.discountPercentage)) /
+      100
+    ).toString();
+    this.RoundedPrice = parseFloat(num).toFixed(2);
+  }
 }

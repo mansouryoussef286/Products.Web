@@ -1,13 +1,41 @@
 <div class="card">
-  <img class="card-img-top" [src]="Product.thumbnail" alt="Card image cap" />
+  <img [src]="Product.thumbnail" alt="Card image thumbnail" />
+  <div class="discount-percentage">-{{Product.discountPercentage}}%</div>
   <div class="card-body">
     <h5 class="card-title">{{Product.title}}</h5>
-    <p class="card-text">{{Product.description}}</p>
-    <div class="rating">
-      <span class="rate" *ngIf="Product.rating">{{Product.rating}} / 5 </span>
-      <span class="rate" *ngIf="!Product.rating">N/A </span>
+    <p>{{Product.description}}</p>
+    <div class="price">
+      <span class="before">
+        <span class="bold">{{Product.price}}</span> USD
+      </span>
+      <span class="after">
+        <span class="bold"> {{RoundedPrice}} </span>
+        USD
+      </span>
     </div>
-    <div class="price">{{Product.price | currency}}</div>
-    <!-- <a href="#" class="btn btn-primary" [routerLink]="['/',RoutePaths.Course, Course.Id.toString()]">Go somewhere</a> -->
+    <div class="about">
+      <div class="row">
+        Brand:
+        <span class="value">{{Product.brand}}</span>
+      </div>
+      <div class="row">
+        Category:
+        <span class="value">{{Product.category}}</span>
+      </div>
+      <div class="row">
+        In stock:
+        <span class="value">{{Product.stock}}</span>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="rating">
+        <span class="rate">
+          <i class="fa fa-star"></i>
+          {{Product.rating}}
+        </span>
+        ({{Product.reviews.length}})
+      </div>
+      <button class="add-to-cart">ADD TO CART</button>
+    </div>
   </div>
 </div>

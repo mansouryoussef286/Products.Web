@@ -1,2 +1,12 @@
 @import "_Variables.scss";
 @import "Layout/_Layout.scss";
+
+* {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+}

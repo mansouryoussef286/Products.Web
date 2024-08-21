@@ -18,6 +18,7 @@ import { RoutePaths } from '@App/Common/Settings/RoutePaths';
 import { ProductModels } from '@App/Common/Models/Product.Models';
 import { ProductCardComponent } from './CourseCard/ProductCard';
 import { LoaderComponent } from '@App/Common/Widgets/Spinners/Loader/Loader';
+import { Category } from '@App/Common/Models/Category.Models';
 // import { CourseModels } from '@App/Common/Models/Course.Models';
 // import { CourseTypeEnum } from '@App/Common/Enums/CourseType.Enum';
 // import { StarRatingComponent } from '@App/Common/Widgets/StarRating/StarRating';
@@ -42,7 +43,8 @@ export class ProductsListComponent implements OnInit {
   // courseTypesValues = Object.values(CourseTypeEnum);
 
   // Filter!: CourseModels.Filter;
-  Products!: ProductModels.Product[];
+  Products?: ProductModels.Product[];
+  Categories!: Category[];
   IsLoaded: boolean = false;
 
   constructor(
@@ -57,6 +59,7 @@ export class ProductsListComponent implements OnInit {
 
   ngOnInit() {
     this.Data.GetProducts();
+    this.Data.GetCategories();
   }
 
   Data = {
@@ -82,5 +85,18 @@ export class ProductsListComponent implements OnInit {
         }
       );
     },
+    GetCategories: () => {
+      this.IsLoaded = false;
+      let endPoint = HttpEndPoints.Products.Categories;
+      this.HttpService.Get<Category[]>(endPoint).subscribe((data) => {
+        this.IsLoaded = true;
+        this.Categories = data;
+      });
+    },
   };
+
+  getNumber(category: string) {
+    return this.Products?.filter((p) => p.category == category.toLowerCase())
+      .length;
+  }
 }

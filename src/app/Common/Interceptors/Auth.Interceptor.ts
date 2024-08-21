@@ -24,8 +24,6 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     let accessToken = this.AuthService.AccessToken;
     let httpRequest = req;
-    console.log('interceporotnlmcsdnvnsdlcvnlvnnn');
-
     httpRequest = this.AddAccessToken(req, accessToken);
 
     return next.handle(httpRequest).pipe(

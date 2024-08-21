@@ -24,6 +24,8 @@
       placeholder="search"
       *ngIf="AuthService.IsAuthenticated"
     />
+    <i class="fa fa-search"></i>
+
     <a
       class="nav-link"
       *ngIf="AuthService.IsAuthenticated"
@@ -44,7 +46,7 @@
       *ngIf="AuthService.IsAuthenticated"
       routerLinkActive="active"
     >
-      cart
+      <i class="fa fa-shopping-cart"></i>
     </a>
   </div>
 </nav>

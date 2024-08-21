@@ -1,15 +1,28 @@
-<div class="list"></div>
-
 <div class="page-inner">
-  <h1>Explore Our Courses</h1>
+  <h1>Title</h1>
+  <div class="bread-crumbs">Home / Products / Smart Phones</div>
+
   <div class="page-section">
     <div class="page-section" *ngIf="!IsLoaded">
       <app-loader></app-loader>
     </div>
-    <div class="page-container courses" *ngIf="IsLoaded">
-      <ng-container *ngFor="let product of Products">
-        <app-product-card [Product]="product"></app-product-card>
-      </ng-container>
+    <div class="page-container" *ngIf="IsLoaded">
+      <div class="categories">
+        <h3 class="title">Products</h3>
+        <input type="radio" name="category" id="all" />
+        <label for="all"> All ({{Products?.length}}) </label>
+        <ng-container *ngFor="let category of Categories">
+          <input type="radio" name="category" [id]="category.name" />
+          <label [for]="category.name">
+            {{category.name}} ({{getNumber(category.name)}})
+          </label>
+        </ng-container>
+      </div>
+      <div class="products">
+        <ng-container *ngFor="let product of Products">
+          <app-product-card [Product]="product"></app-product-card>
+        </ng-container>
+      </div>
     </div>
   </div>
 </div>
