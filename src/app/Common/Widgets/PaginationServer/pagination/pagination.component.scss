@@ -1,0 +1,18 @@
+.pagination {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+}
+
+.page-item {
+  margin: 0 2px;
+}
+
+.page-item.disabled .page-link {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.page-item.active .page-link {
+  font-weight: bold;
+}

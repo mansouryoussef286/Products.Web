@@ -1,27 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
-import { AuthService } from '@App/Common/Services/Auth.Service';
-// import { NotifyService } from '@App/Common/Services/Notify.Service';
-// import { ErrorCodesService } from '@App/Common/Services/ErrorCodes.Service';
 import {
   StorageEnum,
   StorageService,
 } from '@App/Common/Services/Storage.Service';
 import { HttpService } from '@App/Common/Services/Http.Service';
-// import { CourseCardComponent } from './CourseCard/CourseCard';
 import { HttpEndPoints } from '@App/Common/Settings/HttpEndPoints';
-// import { LoaderComponent } from '@App/Common/Widgets/Spinners/Loader/Loader';
-import { RoutePaths } from '@App/Common/Settings/RoutePaths';
 import { ProductModels } from '@App/Common/Models/Product.Models';
 import { ProductCardComponent } from './CourseCard/ProductCard';
 import { LoaderComponent } from '@App/Common/Widgets/Spinners/Loader/Loader';
 import { Category } from '@App/Common/Models/Category.Models';
-// import { CourseModels } from '@App/Common/Models/Course.Models';
-// import { CourseTypeEnum } from '@App/Common/Enums/CourseType.Enum';
-// import { StarRatingComponent } from '@App/Common/Widgets/StarRating/StarRating';
+import { RepeaterServerModule } from '@App/Common/Widgets/PaginationServer/RepeaterServer.Module';
+import {
+  GridOptionsModel,
+  SortOrderEnum,
+} from '@App/Common/Widgets/PaginationServer/GridOptionsModel';
 
 @Component({
   standalone: true,
@@ -32,28 +27,26 @@ import { Category } from '@App/Common/Models/Category.Models';
     CommonModule,
     RouterModule,
     ProductCardComponent,
-    // CourseCardComponent,
     LoaderComponent,
-    // StarRatingComponent,
+    // RepeaterServer,
+    // SortField,
+    // Pagination,
+    // PageSizeOption,
+    // PagingLabel,
+    RepeaterServerModule,
   ],
 })
 export class ProductsListComponent implements OnInit {
-  // RoutePaths = RoutePaths;
-  // courseTypes = Object.keys(CourseTypeEnum);
-  // courseTypesValues = Object.values(CourseTypeEnum);
-
-  // Filter!: CourseModels.Filter;
   Products?: ProductModels.Product[];
   Categories!: Category[];
   IsLoaded: boolean = false;
+  IsProductsLoaded: boolean = false;
 
+  GridOptions: GridOptionsModel = new GridOptionsModel('', SortOrderEnum.Asc);
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private HttpService: HttpService,
-    // private ErrorCodesService: ErrorCodesService,
-    // private NotifyService: NotifyService,
-    // private AuthService: AuthService,
     private StorageService: StorageService
   ) {}
 
@@ -63,28 +56,19 @@ export class ProductsListComponent implements OnInit {
   }
 
   Data = {
-    GetProducts: () => {
-      this.IsLoaded = false;
-      // console.log(this.Filter);
-      // if (!this.Filter) {
-      // 	this.Filter = this.StorageService.GetLocalStorage<CourseModels.Filter>(StorageEnum.CoursesFilter);
-      // 	// no filter in storage
-      // 	if (Object.keys(this.Filter).length == 0) {
-      // 		this.Filter = new CourseModels.Filter();
-      // 		// console.log('get filter from code', this.Filter);
-      // 	} else {
-      // 		// console.log('get filter from storage', this.Filter);
-      // 	}
-      // }
-
-      let endPoint = HttpEndPoints.Products.GetAll;
+    GetProducts: (queryParam?: string) => {
+      this.IsProductsLoaded = false;
+      let endPoint = HttpEndPoints.Products.GetAll + (queryParam ?? '');
       this.HttpService.Get<ProductModels.ApiResponse>(endPoint).subscribe(
         (data) => {
-          this.IsLoaded = true;
+          this.IsProductsLoaded = true;
           this.Products = data.products;
+          this.GridOptions.Count = data.total;
+          console.log(this.GridOptions);
         }
       );
     },
+
     GetCategories: () => {
       this.IsLoaded = false;
       let endPoint = HttpEndPoints.Products.Categories;
@@ -92,6 +76,22 @@ export class ProductsListComponent implements OnInit {
         this.IsLoaded = true;
         this.Categories = data;
       });
+    },
+
+    OnPaginationChange: () => {
+      let queryParam = '?';
+      if (this.GridOptions.PageSize)
+        queryParam += `limit=${this.GridOptions.PageSize}&`;
+      if (this.GridOptions.PageIndex)
+        queryParam += `skip=${
+          this.GridOptions.PageSize * this.GridOptions.PageIndex
+        }&`;
+      if (this.GridOptions.SortField)
+        queryParam += `sortBy=${this.GridOptions.SortField}&order=${this.GridOptions.SortOrder}`;
+
+      console.log(queryParam);
+
+      this.Data.GetProducts(queryParam);
     },
   };
 
