@@ -23,11 +23,11 @@
       align-items: center;
       text-decoration: none;
       color: var(--primary-font-color);
-      margin-inline-end: 20px;
       img {
         width: 32px;
         height: 32px;
         object-fit: contain;
+        margin-inline-end: 10px;
       }
     }
   }

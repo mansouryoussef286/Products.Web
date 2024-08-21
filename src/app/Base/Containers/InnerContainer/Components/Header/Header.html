@@ -23,12 +23,8 @@
       login
     </a>
 
-    <div class="search">
-      <input
-        type="text"
-        placeholder="search"
-        *ngIf="AuthService.IsAuthenticated"
-      />
+    <div class="search" *ngIf="AuthService.IsAuthenticated">
+      <input type="text" placeholder="search" />
       <i class="fa fa-search"></i>
     </div>
 

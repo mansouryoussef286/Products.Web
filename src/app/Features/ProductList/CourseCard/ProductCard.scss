@@ -99,14 +99,8 @@ $border-color: var(--border-color);
         }
       }
 
-      .add-to-cart {
+      .btn.cart {
         width: 100%;
-        background-color: $blue;
-        font-weight: 700;
-        padding: 15px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
       }
     }
   }

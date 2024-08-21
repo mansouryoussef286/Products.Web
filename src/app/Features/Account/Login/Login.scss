@@ -1,115 +1,64 @@
 .account-bg {
-	background-size: cover;
-	background-position: center;
+  background-size: cover;
+  background-position: center;
 }
 
 .account {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	min-height: 100vh;
-	.logo,
-	.account-box,
-	.copyright {
-		animation: fadeInUp 1s;
-	}
-	.logo {
-		width: 250px;
-		margin: 20px 0;
-		z-index: 1;
-	}
-	.account-box {
-		width: 50%;
-		max-width: 450px;
-		min-width: 400px;
-		// padding-bottom: 24px;
-		background-color: #f7f9fa;
-		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
-		align-items: center;
-		border-radius: 5px;
-		// box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-		box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-		position: relative;
-		overflow: hidden;
-		.account-box-bg {
-			background-size: cover;
-			z-index: 0;
-			background-color: var(--primary-color1);
-			height: 120px;
-			width: 100%;
-			position: absolute;
-		}
-		.login-title {
-			color: #fff;
-			font-size: 25px;
-			letter-spacing: 1.1px;
-			margin: 20px 0;
-			z-index: 2;
-			text-align: center;
-			span {
-				font-weight: 600;
-			}
-			.sub-title {
-				font-size: 16px;
-			}
-		}
-		.login-form {
-			width: 90%;
-			background-color: #f7f9fa;
-			border-radius: 5px;
-			padding: 20px;
-			z-index: 2;
-			.form-group {
-				padding-bottom: 20px;
-				label {
-					font-size: 16px;
-					font-weight: 600;
-					margin-bottom: 6px;
-				}
-				.form-control {
-					padding: 6px 10px 6px 30px;
-					margin-bottom: 1px;
-					border-radius: 3px;
-				}
-				.input-icon {
-					position: relative;
-					i {
-						color: #8ca3bd;
-						position: absolute;
-						z-index: 3;
-						font-size: 16px;
-						top: 50%;
-						transform: translateY(-50%);
-						&.left {
-							left: 10px;
-							right: auto;
-						}
-						&.right {
-							left: auto;
-							right: 20px;
-							cursor: pointer;
-						}
-					}
-				}
-			}
-		}
-		.forgot-password {
-			a {
-				font-size: 16px;
-				text-decoration: none;
-				color: #8ca3bd;
-				&:hover {
-					color: #58697a;
-				}
-			}
-		}
-	}
-	.copyright {
-		font-size: 15px;
-		margin: 15px;
-		z-index: 1;
-	}
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - var(--header-height));
+  color: var(--primary-font-color);
+
+  .account-box {
+    width: 50%;
+    max-width: 450px;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    .logo {
+      width: 250px;
+      margin: 20px 0;
+      z-index: 1;
+    }
+    h1 {
+      margin-bottom: 0;
+    }
+    h4 {
+      color: var(--secondary-font-color);
+    }
+
+    .login-form {
+      width: 90%;
+      padding: 20px;
+      z-index: 2;
+      .form-group {
+        padding-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+
+        label {
+          font-size: 16px;
+          margin-bottom: 6px;
+        }
+        .form-control {
+          padding: 10px;
+          margin-bottom: 1px;
+          border-radius: 8px;
+          border: 1px solid var(--secondary-font-color);
+          outline: none;
+        }
+      }
+
+      .submit {
+        button {
+          width: 100%;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
 }
