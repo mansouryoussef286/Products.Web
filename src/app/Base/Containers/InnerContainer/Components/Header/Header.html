@@ -4,12 +4,16 @@
       <img src="/assets/Images/logo.png" alt="logo-img" class="logo-img" />
       ClickTik
     </a>
-    <a class="nav-link" [routerLink]="['home']" routerLinkActive="active">
+    <a
+      class="nav-link"
+      [routerLink]="[RoutePaths.Products]"
+      routerLinkActive="active"
+    >
       home
     </a>
   </div>
 
-  <div>
+  <div class="right">
     <a
       class="nav-link"
       *ngIf="!AuthService.IsAuthenticated"
@@ -19,34 +23,43 @@
       login
     </a>
 
-    <input
-      type="text"
-      placeholder="search"
+    <div class="search">
+      <input
+        type="text"
+        placeholder="search"
+        *ngIf="AuthService.IsAuthenticated"
+      />
+      <i class="fa fa-search"></i>
+    </div>
+
+    <a
+      class="nav-link cart"
       *ngIf="AuthService.IsAuthenticated"
-    />
-    <i class="fa fa-search"></i>
+      routerLinkActive="active"
+    >
+      <i class="fa fa-shopping-cart"></i>
+      <span class="count">3</span>
+    </a>
 
     <a
       class="nav-link"
       *ngIf="AuthService.IsAuthenticated"
       routerLinkActive="active"
+      [routerLink]="[RoutePaths.Products]"
     >
       account
+      <img
+        [src]="CurrentUser.image? CurrentUser.image: 'assets/Images/default-pp.png'"
+      />
     </a>
+
     <a
       class="nav-link"
       *ngIf="AuthService.IsAuthenticated"
       routerLinkActive="active"
-      (click)="signOut()"
+      [routerLink]="[RoutePaths.Login]"
     >
       signout
-    </a>
-    <a
-      class="nav-link"
-      *ngIf="AuthService.IsAuthenticated"
-      routerLinkActive="active"
-    >
-      <i class="fa fa-shopping-cart"></i>
     </a>
   </div>
 </nav>

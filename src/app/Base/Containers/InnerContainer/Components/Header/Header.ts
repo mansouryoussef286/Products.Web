@@ -28,9 +28,4 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
-
-  signOut() {
-    this.AuthService.SignOut();
-    this.Router.navigate([RoutePaths.Login]);
-  }
 }
