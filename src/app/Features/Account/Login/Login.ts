@@ -53,6 +53,7 @@ export class LoginComponent {
     let requestModel = {
       username: this.Credentials.username.trim(),
       password: this.Credentials.password.trim(),
+      expiresInMins: 1,
     } as AuthModels.LoginReqModel;
 
     this.ReturnUrl = this.ActivatedRoute.snapshot.queryParams['returnUrl'];

@@ -2,6 +2,7 @@ export namespace AuthModels {
   export class LoginReqModel {
     username!: string;
     password!: string;
+    expiresInMins!: number;
   }
 
   export class RefreshTokenReqModel {
