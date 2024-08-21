@@ -6,9 +6,8 @@ export namespace AuthModels {
   }
 
   export class RefreshTokenReqModel {
-    Id!: number;
-    AccessToken!: string;
-    RefreshToken!: string;
+    refreshToken!: string;
+    expiresInMins!: number;
   }
 
   export class CurrentUserResModel {
@@ -19,6 +18,11 @@ export namespace AuthModels {
     lastName!: string;
     gender!: string;
     image!: string;
+    token!: string;
+    refreshToken!: string;
+  }
+
+  export class RefreshTokenResModel {
     token!: string;
     refreshToken!: string;
   }

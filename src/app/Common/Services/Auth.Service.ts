@@ -72,21 +72,21 @@ export class AuthService {
   }
 
   RefreshAccessToken(): any {
-    // let requestModel: AuthModels.RefreshTokenReqModel = {
-    //   Id: this.CurrentUser.id,
-    //   AccessToken: this.AccessToken,
-    //   RefreshToken: this.RefreshToken,
-    // };
-    // if (!requestModel.AccessToken || !requestModel.RefreshToken) return;
-    // let httpEndPoint = HttpEndPoints.Account.Refresh;
-    // return this.HttpService.Post<
-    //   AuthModels.RefreshTokenReqModel,
-    //   AuthModels.RefreshTokenResModel
-    // >(httpEndPoint, requestModel).pipe(
-    //   tap((data) => {
-    //     console.log('access token refreshed');
-    //     this.SignIn(data);
-    //   })
-    // );
+    let requestModel: AuthModels.RefreshTokenReqModel = {
+      refreshToken: this.RefreshToken,
+      expiresInMins: 60,
+    };
+    if (!requestModel.refreshToken) return;
+
+    let httpEndPoint = HttpEndPoints.Account.Refresh;
+    return this.HttpService.Post<
+      AuthModels.RefreshTokenReqModel,
+      AuthModels.RefreshTokenResModel
+    >(httpEndPoint, requestModel).pipe(
+      tap((data) => {
+        this.AccessToken = data.token;
+        this.RefreshToken = data.refreshToken;
+      })
+    );
   }
 }

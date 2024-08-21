@@ -1,7 +1,7 @@
 export class HttpEndPoints {
   public static Account = {
     Login: 'auth/login',
-    Refresh: 'account/refresh',
+    Refresh: 'auth/refresh',
   };
 
   public static Products = {
