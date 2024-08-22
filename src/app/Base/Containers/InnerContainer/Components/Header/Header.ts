@@ -1,6 +1,7 @@
 import { AuthModels } from '@App/Common/Models/Auth.Models';
 import { AuthService } from '@App/Common/Services/Auth.Service';
 import { HttpService } from '@App/Common/Services/Http.Service';
+import { CartService } from '@App/Common/Services/cart.service';
 import { ProductsService } from '@App/Common/Services/products.service';
 import { RoutePaths } from '@App/Common/Settings/RoutePaths';
 import { CommonModule } from '@angular/common';
@@ -19,15 +20,18 @@ export class HeaderComponent implements OnInit {
   CurrentUser!: AuthModels.CurrentUserResModel;
   RoutePaths = RoutePaths;
   SearchInput!: string;
+  CartCount!: number;
 
   constructor(
     private Router: Router,
     protected AuthService: AuthService,
-    protected ProductsService: ProductsService
+    protected ProductsService: ProductsService,
+    protected CartService: CartService
   ) {}
 
   ngOnInit(): void {
     this.InitUserSub();
+    this.InitCartSub();
     this.ProductsService.InitSearchSub();
   }
 
@@ -38,6 +42,12 @@ export class HeaderComponent implements OnInit {
       if (isExisting) {
         this.CurrentUser = this.AuthService.CurrentUser;
       }
+    });
+  }
+
+  InitCartSub() {
+    this.CartService.Cart$.subscribe((c) => {
+      this.CartCount = c.totalQuantity;
     });
   }
 

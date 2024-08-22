@@ -10,4 +10,9 @@ export class HttpEndPoints {
     Categories: 'products/categories',
     Search: 'products/search?q={query}',
   };
+
+  public static Cart = {
+    Get: 'carts/user/{id}',
+    Update: 'carts/{id}',
+  };
 }

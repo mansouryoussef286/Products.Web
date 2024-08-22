@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpService } from '@App/Common/Services/Http.Service';
 import { ProductModels } from '@App/Common/Models/Product.Models';
+import { CartService } from '@App/Common/Services/cart.service';
 
 @Component({
   standalone: true,
@@ -18,7 +19,8 @@ export class ProductCardComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private HttpService: HttpService
+    private HttpService: HttpService,
+    private CartService: CartService
   ) {}
 
   ngOnInit() {
@@ -27,5 +29,9 @@ export class ProductCardComponent implements OnInit {
       100
     ).toString();
     this.RoundedPrice = parseFloat(num).toFixed(2);
+  }
+
+  AddToCart() {
+    this.CartService.AddToCart(this.Product);
   }
 }

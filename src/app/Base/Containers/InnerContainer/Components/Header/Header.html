@@ -39,7 +39,7 @@
       routerLinkActive="active"
     >
       <i class="fa fa-shopping-cart"></i>
-      <span class="count">3</span>
+      <span class="count" *ngIf="CartCount">{{CartCount}}</span>
     </a>
 
     <a

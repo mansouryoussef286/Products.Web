@@ -27,7 +27,6 @@ export class HttpService {
   }
 
   Get<T>(endPoint: string) {
-    console.log('get request');
     const endPointUrl = this.ApiUrl + endPoint;
     return this.HttpClient.get<T>(endPointUrl).pipe(
       catchError((error) => {
