@@ -49,8 +49,7 @@ export class CartService {
 
     this.HttpService.Get<CartModels.ApiResponse>(endPoint).subscribe(
       (response) => {
-        console.log(response);
-
+        // console.log(response);
         this.Cart$.next(response.carts[0]);
       }
     );
@@ -63,13 +62,13 @@ export class CartService {
     let reqModel = new CartModels.ReqModel();
     reqModel.merge = true;
     reqModel.products = [new CartModels.ProductReqModel(product.id, 1)];
-    console.log(reqModel);
+    // console.log(reqModel);
 
     this.HttpService.Put2<CartModels.ReqModel, CartModels.Cart>(
       endPoint,
       reqModel
     ).subscribe((response) => {
-      console.log(response);
+      // console.log(response);
 
       this.Cart$.next(response);
       alert(`Added one "${product.title}" to your cart!`);

@@ -1,6 +1,8 @@
 <div class="page-inner">
-  <h1>Title</h1>
-  <div class="bread-crumbs">Home / Products / Smart Phones</div>
+  <h1>{{SearchInput}}</h1>
+  <div class="bread-crumbs">
+    Home / Products <span *ngIf="SelectedCategory">/ {{SelectedCategory}}</span>
+  </div>
 
   <div class="page-section">
     <div class="page-section" *ngIf="!IsLoaded">
@@ -9,10 +11,23 @@
     <div class="page-container" *ngIf="IsLoaded">
       <div class="categories">
         <h3 class="title">Products</h3>
-        <input type="radio" name="category" id="all" />
+        <input
+          type="radio"
+          name="category"
+          id="all"
+          value="All"
+          [checked]="!SelectedCategory"
+          (change)="OnCategoryInputChange($event)"
+        />
         <label for="all"> All ({{Products?.length}}) </label>
         <ng-container *ngFor="let category of Categories">
-          <input type="radio" name="category" [id]="category.name" />
+          <input
+            type="radio"
+            name="category"
+            [id]="category.name"
+            [value]="category.name"
+            (change)="OnCategoryInputChange($event)"
+          />
           <label [for]="category.name">
             {{category.name}} ({{getNumber(category.name)}})
           </label>
@@ -22,7 +37,7 @@
         <div *ngIf="Products && Products.length== 0">No Products Found</div>
         <pagination-server
           [GridOptions]="GridOptions"
-          (GridOptionsChange)="Data.OnPaginationChange()"
+          (GridOptionsChange)="OnPaginationChange()"
           *ngIf="Products && Products.length> 0"
         >
           <div class="paging">

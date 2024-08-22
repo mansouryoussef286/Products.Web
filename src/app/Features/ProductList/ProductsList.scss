@@ -4,6 +4,7 @@ $border-color: var(--border-color);
   min-height: calc(100vh - var(--header-height));
   h1 {
     padding-inline-start: var(--page-inner-content-padding);
+    height: 36px;
   }
   .page-section {
     flex-direction: column;

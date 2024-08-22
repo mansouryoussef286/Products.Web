@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.InitUserSub();
     this.InitCartSub();
+    this.InitSearchInputSub();
     this.ProductsService.InitSearchSub();
   }
 
@@ -51,7 +52,13 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  onSearch() {
-    this.ProductsService.searchSubject.next(this.SearchInput);
+  InitSearchInputSub() {
+    this.ProductsService.ProductsResponse$.subscribe((data) => {
+      this.SearchInput = this.ProductsService.SearchInput;
+    });
+  }
+
+  onSearchInputChange() {
+    this.ProductsService.SearchInput = this.SearchInput;
   }
 }
